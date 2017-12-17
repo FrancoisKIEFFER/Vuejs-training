@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <script src="vue.2.5.11.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Hello Vue.js</title>
 </head>
 
@@ -17,7 +18,16 @@
             <button type="submit">ajouter</button>
         </form>
         <ul>
-            <li v-bind:class="{completed: task.done}" v-on:click="task.done = !task.done" v-for="task in tasks">{{task.description}}</li>
+            <li v-bind:class="{completed: task.done}" v-on:click="task.done = !task.done" v-for="task in tasks">
+                <span v-if="!task.isInEditMode">
+                    <i class="fa fa-edit" v-on:click="switchMode(task)"></i>{{task.description}}
+                </span>
+
+                <span v-else>
+                    <i class="fa fa-thumbs-o-up"></i>
+                    <input type="text" v-model="task.description">
+                </span>
+            </li>
         </ul>
     </div>
 
@@ -28,13 +38,16 @@
             data: {
                 title: "Todo",
                 task: null,
-                tasks: []
+                tasks: [],
+                isInEditMode: false
             },
             methods: {
                 addTask: function () {
-                    this.tasks.push({ id: Date.now(), description: this.task, done: false });
-                    console.log("tasks ", this.tasks)
+                    this.tasks.push({ id: Date.now(), description: this.task, done: false, isInEditMode: false });
                     this.task = null;
+                },
+                switchMode: function (task) {
+                    task.isInEditMode = !task.isInEditMode
                 }
             }
         })
