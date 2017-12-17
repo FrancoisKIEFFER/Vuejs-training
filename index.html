@@ -11,8 +11,10 @@
 <body>
     <div id="app">
         <h2>{{title}}</h2>
-        <input type="text" placeholder="taches à faire" v-model="task">
-        <button v-on:click="addTask">ajouter</button>
+        <form v-on:submit.prevent="addTask($event)">
+            <input type="text" placeholder="taches à faire" v-model="task">
+            <button type="submit">ajouter</button>
+        </form>
     </div>
     <script>
         new Vue({
