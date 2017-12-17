@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <script src="vue.2.5.11.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Hello Vue.js</title>
 </head>
 
@@ -16,11 +17,13 @@
             <button type="submit">ajouter</button>
         </form>
         <ul>
-            <li v-for="task in tasks">{{task.description}}</li>
+            <li v-bind:class="{completed: task.done}" v-on:click="task.done = !task.done" v-for="task in tasks">{{task.description}}</li>
         </ul>
     </div>
+
+
     <script>
-        new Vue({
+        var vm = new Vue({
             el: '#app',
             data: {
                 title: "Todo",
