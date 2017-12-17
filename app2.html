@@ -28,8 +28,13 @@
 
     <script>
         Vue.component('user-list', {
-            template: '<div><ul><li v-for="user in data">{{user.username}}</li></ul></div>',
+            template: '<div><ul><li v-for="user in data">{{user.username}}<user-details v-bind:usr="user"></user-details></li></ul></div>',
             props: ['data']
+        })
+
+        Vue.component('user-details', {
+            template: '<div>id: {{usr.id}}, ville: {{usr.address.city}}, email: {{usr.email}}</div>',
+            props: ['usr']
         })
 
 
