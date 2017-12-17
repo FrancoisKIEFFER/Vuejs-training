@@ -26,7 +26,7 @@
             <div slot="cardbody">visitez meanjs.fr</div>
         </my-card>
         <hr>
-        <user-list v-bind:data="users"></user-list>
+        <user-list v-bind:data="users" v-bind:users-coming="usersWhoWillCome"></user-list>
 
     </div>
 
@@ -37,10 +37,10 @@
         })
         Vue.component('user-list', {
             template: '<div><ul><li v-for="user in data">{{user.username}}<user-details v-bind:usr="user" v-on:accept="registerUser(user)"></user-details></li></ul></div>',
-            props: ['data'],
+            props: ['data', 'usersComing'],
             methods: {
                 registerUser: function (user) {
-                    console.log(user);
+                    this.usersComing.push(user)
                 }
             }
         })
@@ -61,7 +61,8 @@
             data: {
                 title: 'Lifecycle hooks',
                 usersUrl: "https://jsonplaceholder.typicode.com/users",
-                users: []
+                users: [],
+                usersWhoWillCome: []
             },
             beforeCreate: function () {
                 console.log('beforeCreate')
