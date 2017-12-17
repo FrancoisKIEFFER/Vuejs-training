@@ -7,6 +7,8 @@
     <script src="vue.2.5.11.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
     <title>Hello Vue.js</title>
 </head>
 
@@ -26,6 +28,11 @@
                 <input type="text" placeholder="votre avis" v-model="opinion"> {{ opinionResult}}
             </div>
         </div>
+
+        <div>
+            <h2>Chercher un utilisateur Github</h2>
+            <input type="text" v-model="githubUser"> {{githubUserResult}}
+        </div>
     </div>
 
 
@@ -38,7 +45,9 @@
                 phone: "06 01 23 45 67",
                 emailForNewsletter: '',
                 opinion: '',
-                opinionResult: ''
+                opinionResult: '',
+                githubUser: '',
+                githubUserResult: ''
             },
             filters: {
                 shorten: function (value) {
@@ -69,7 +78,16 @@
                     } else {
                         this.opinionResult = ''
                     }
-                }
+                },
+                // githubUser: function (username) {
+                //     axios.get('https://api.github.com/users/' + username)
+                //         .then(function (data) {
+                //             console.log(data)
+                //         })
+                // }
+                githubUser: _.debounce(function (username) {
+                    axios.get('https://api.github.com/users/' + username).then(function (data) { console.log(data) })
+                }, 700)
             }
         })
     </script>
