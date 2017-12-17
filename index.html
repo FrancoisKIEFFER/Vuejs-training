@@ -11,13 +11,15 @@
 <body>
     <div id="app">
         {{course}} - {{date}}
+        <img :src="url">
     </div>
     <script>
         new Vue({
             el: '#app',
             data: {
                 course: 'Vue.js 2 !!!!',
-                date: Date.now()
+                date: Date.now(),
+                url: "http://blog.xebia.fr/wp-content/uploads/2016/11/vuejs-logo-5.png"
             }
         })
     </script>
