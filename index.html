@@ -12,6 +12,7 @@
     <div id="app">
         {{course}} - {{date}}
         <img :src="url">
+        <input type="text" placeholder="votre nom" v-model="name">{{name}}
     </div>
     <script>
         new Vue({
@@ -19,7 +20,8 @@
             data: {
                 course: 'Vue.js 2 !!!!',
                 date: Date.now(),
-                url: "http://blog.xebia.fr/wp-content/uploads/2016/11/vuejs-logo-5.png"
+                url: "http://blog.xebia.fr/wp-content/uploads/2016/11/vuejs-logo-5.png",
+                name: ""
             }
         })
     </script>
