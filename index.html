@@ -10,18 +10,23 @@
 
 <body>
     <div id="app">
-        {{course}} - {{date}}
-        <img :src="url">
-        <input type="text" placeholder="votre nom" v-model="name">{{name}}
+        <h2>{{title}}</h2>
+        <input type="text" placeholder="taches à faire" v-model="task">
+        <button v-on:click="addTask">ajouter</button>
     </div>
     <script>
         new Vue({
             el: '#app',
             data: {
-                course: 'Vue.js 2 !!!!',
-                date: Date.now(),
-                url: "http://blog.xebia.fr/wp-content/uploads/2016/11/vuejs-logo-5.png",
-                name: ""
+                title: "Todo",
+                task: "",
+                tasks: []
+            },
+            methods: {
+                addTask: function () {
+                    this.tasks.push(this.task);
+                    this.task = '';
+                }
             }
         })
     </script>
