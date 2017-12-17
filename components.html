@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="vue.2.5.11.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Hello Vue.js</title>
+</head>
+
+<body>
+    <div id="app">
+        <global-cmp></global-cmp>
+    </div>
+
+
+    <script>
+        Vue.component('global-cmp', {
+            template: '<div>composant global</div>'
+        })
+
+        var vm = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+
+</html>
