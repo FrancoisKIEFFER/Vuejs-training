@@ -36,13 +36,23 @@
             template: '<div><slot name="cardheader">titre par défaut</slot><slot name="cardbody">contenu par défaut</slot></div>'
         })
         Vue.component('user-list', {
-            template: '<div><ul><li v-for="user in data">{{user.username}}<user-details v-bind:usr="user"></user-details></li></ul></div>',
-            props: ['data']
+            template: '<div><ul><li v-for="user in data">{{user.username}}<user-details v-bind:usr="user" v-on:accept="registerUser(user)"></user-details></li></ul></div>',
+            props: ['data'],
+            methods: {
+                registerUser: function (user) {
+                    console.log(user);
+                }
+            }
         })
 
         Vue.component('user-details', {
-            template: '<div>id: {{usr.id}}, ville: {{usr.address.city}}, email: {{usr.email}}</div>',
-            props: ['usr']
+            template: '<div>id: {{usr.id}}, ville: {{usr.address.city}}, email: {{usr.email}} <button v-on:click="acceptInvitation">Accepter</button></div>',
+            props: ['usr'],
+            methods: {
+                acceptInvitation: function () {
+                    this.$emit('accept')
+                }
+            }
         })
 
 
