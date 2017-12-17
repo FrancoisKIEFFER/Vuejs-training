@@ -14,6 +14,12 @@
     <div id="app">
         {{about | shorten}}
         <hr> {{this.waysToContact}}
+
+        <div>
+            s'inscrir à une newsletter :
+            <input type="text" placeholder="votre adree mail" v-model="emailForNewsletter">
+            <button v-bind:disabled="emailAddressInvalid">Inscription</button>
+        </div>
     </div>
 
 
@@ -23,7 +29,8 @@
             data: {
                 about: 'Vue (pronounced /vjuː/, like view) is a progressive framework for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable. The core library is focused on the view layer only, and is easy to pick up and integrate with other libraries or existing projects. On the other hand, Vue is also perfectly capable of powering sophisticated Single-Page Applications when used in combination with modern tooling and supporting libraries.',
                 email: 'frankie@prime.com',
-                phone: "06 01 23 45 67"
+                phone: "06 01 23 45 67",
+                emailForNewsletter: ''
             },
             filters: {
                 shorten: function (value) {
@@ -36,6 +43,15 @@
             computed: {
                 waysToContact: function () {
                     return 'email : ' + this.email + ' tel : ' + this.phone
+                },
+                emailAddressInvalid: function () {
+                    // if (this.emailForNewsletter.length < 2 || this.emailForNewsletter.indexOf('@') === -1 || this.emailForNewsletter.indexOf('.') === -1) {
+                    //     return true;
+                    // } else {
+                    //     return false;
+                    // }
+                    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return !re.test(this.emailForNewsletter);
                 }
             }
         })
